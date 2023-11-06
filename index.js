@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Create a light
     var light = new BABYLON.HemisphericLight("light", new BABYLON.Vector3(0, 1, 0), scene);
-    light.intensity = 2.5; // Adjust the intensity as needed
+    light.intensity = 1; // Adjust the intensity as needed
     light.position = new BABYLON.Vector3(0, 10, 0); // Adjust the position as needed
     light.diffuse = new BABYLON.Color3(1, 1, 1); // White color, adjust as needed
 
@@ -68,10 +68,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     var angle = 0;
 
+    // set background color to clear
+    scene.clearColor = new BABYLON.Color4(0, 0, 0, 0);
+
     // Run the engine
     engine.runRenderLoop(function () {
         // Rotate the camera around the Magikarp
-        var radius = 10;
+        var radius = 5;
         angle += engine.getDeltaTime() * 0.001; // Adjust the multiplier for rotation speed
         camera.position.x = Math.sin(angle) * radius;
         camera.position.z = Math.cos(angle) * radius;
