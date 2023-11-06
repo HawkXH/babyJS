@@ -14,6 +14,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Create a light
     var light = new BABYLON.HemisphericLight("light", new BABYLON.Vector3(0, 1, 0), scene);
+    light.intensity = 2.5; // Adjust the intensity as needed
+    light.position = new BABYLON.Vector3(0, 10, 0); // Adjust the position as needed
+    light.diffuse = new BABYLON.Color3(1, 1, 1); // White color, adjust as needed
 
     // Load the model from the URL
     BABYLON.SceneLoader.ImportMesh("", "https://raw.githubusercontent.com/HawkXH/models/main/", "Magikarp.glb", scene, function (loadedMeshes) {
@@ -63,8 +66,18 @@ document.addEventListener("DOMContentLoaded", function () {
         scene.beginDirectAnimation(magikarp, animations, 0, 60, true);
     });
 
+    var angle = 0;
+
     // Run the engine
     engine.runRenderLoop(function () {
+        // Rotate the camera around the Magikarp
+        var radius = 10;
+        angle += engine.getDeltaTime() * 0.001; // Adjust the multiplier for rotation speed
+        camera.position.x = Math.sin(angle) * radius;
+        camera.position.z = Math.cos(angle) * radius;
+        camera.setTarget(BABYLON.Vector3.Zero());
+
+        // Render the scene
         scene.render();
     });
 
